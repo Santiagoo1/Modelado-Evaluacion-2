@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BD_kiosko.Data.Entidades;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace BD_kiosko.Data
 {
     public class BDcontextkiosko:DbContext
     {
+        public DbSet<Cliente> clientes { get; set; }
         public BDcontextkiosko(DbContextOptions options) : base(options)
         {
 
