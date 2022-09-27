@@ -1,6 +1,8 @@
 using BD_kiosko.Data;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -9,8 +11,14 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 var conn = builder.Configuration.GetConnectionString("conn");
 builder.Services.AddDbContext<BDcontextkiosko>(opciones =>opciones.UseSqlServer(conn));
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Kiosko", Version = "v1" });
+});
 var app = builder.Build();
-
+app.UseSwagger();
+app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json",
+    "Venta v1"));
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
