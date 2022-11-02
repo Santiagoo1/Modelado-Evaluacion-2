@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace BD_kiosko.Data.Entidades
 {
-    [Index(nameof(DNI), Name = "DNI_UQ", IsUnique = true)]
+    //[Index(nameof(Idcliente), Name = "DNI_UQ", IsUnique = true)]
     public class Cliente :Entity_base
     {
-        public int DNI { get; set; }
+        public int Idcliente { get; set; }
 
         public string Nombre { get; set; }
+
+        public int Cuando_Deben { get; set; }
 
         
     }

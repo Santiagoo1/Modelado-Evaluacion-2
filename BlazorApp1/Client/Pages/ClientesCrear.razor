@@ -1,0 +1,30 @@
+﻿@page "/Clientes/Crear"
+@inject IHttpService http
+@inject NavigationManager navigatorManager
+
+
+<h3>Nuevo Cliente</h3>
+
+<FormClientes cliente="cliente" onCancel="Cancelar" onValidSubmit="Grabar"> 
+
+</FormClientes>
+
+@code {
+    private Cliente cliente = new Cliente();
+
+    private async void Grabar()
+    {
+        var httpRespuesta = await http.Post<Cliente>("api/Clientes", cliente);
+        if (httpRespuesta.Error)
+        {
+            var body = httpRespuesta.HttpResponseMessage;
+        }
+        navigatorManager.NavigateTo("/");
+    }
+
+    private void Cancelar()
+    {
+        navigatorManager.NavigateTo("/");
+    }
+
+}

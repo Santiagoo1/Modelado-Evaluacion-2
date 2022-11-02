@@ -1,0 +1,51 @@
+﻿@page "/Clientes/Editar/{IdCliente:int}"
+@inject IHttpService http
+@inject NavigationManager navigatorManager
+
+<FormClientes cliente="cliente" onCancel="Cancelar" onValidSubmit="Grabar"> 
+
+</FormClientes>
+
+@code {
+    private Cliente cliente = new Cliente();
+    [Parameter] public int IdCliente { get; set; }
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        await Mostrar();
+    }
+
+    private async Task Mostrar()
+    {
+        var respuesta = await http.Get<Cliente>($"api/Clientes/{IdCliente}");
+        if (respuesta.Error)
+        {
+            var body = respuesta.HttpResponseMessage;
+        }
+        else
+        {
+            cliente = respuesta.Respuesta;
+        }
+    }
+
+    private async void Grabar()
+    {
+        var respuesta = await http.Put<Cliente>($"api/clientes/{IdCliente}", cliente);
+
+        if (respuesta.Error)
+        {
+            var body = respuesta.HttpResponseMessage;
+        }
+       navigatorManager.NavigateTo("/");
+
+    }
+
+    private void Cancelar()
+    {
+        navigatorManager.NavigateTo("/");
+    }
+
+
+
+}

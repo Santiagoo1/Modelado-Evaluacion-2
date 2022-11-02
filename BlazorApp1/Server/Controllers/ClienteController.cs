@@ -2,10 +2,11 @@
 using BD_kiosko.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlazorApp1.Server.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Clientes")]
     [ApiController]
     public class ClienteController : ControllerBase
     {
@@ -29,6 +30,16 @@ namespace BlazorApp1.Server.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpGet]
+        
+        public async Task<ActionResult<List<Cliente>>> Get()
+        {
+            var resp = await context.clientes.ToListAsync();
+            return resp;
+        }
+       
+
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Cliente>> Get(int id)
         {
@@ -55,7 +66,9 @@ namespace BlazorApp1.Server.Controllers
                 return NotFound("No existe la venta buscada");
             }
             Cliente.Nombre = client.Nombre;
-            Cliente.DNI = client.DNI;
+            Cliente.Idcliente = client.Idcliente;
+            Cliente.Cuando_Deben = client.Cuando_Deben;
+            
             try
             {
                 context.clientes.Update(Cliente);

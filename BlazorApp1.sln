@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorApp1.Server", "BlazorApp1\Server\BlazorApp1.Server.csproj", "{AD51DC8B-5CD2-4BA5-9425-78E0397DA733}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp1.Server", "BlazorApp1\Server\BlazorApp1.Server.csproj", "{AD51DC8B-5CD2-4BA5-9425-78E0397DA733}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorApp1.Client", "BlazorApp1\Client\BlazorApp1.Client.csproj", "{9A8554C0-8EB0-45F9-9F02-8A7CED60C17A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp1.Client", "BlazorApp1\Client\BlazorApp1.Client.csproj", "{9A8554C0-8EB0-45F9-9F02-8A7CED60C17A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorApp1.Shared", "BlazorApp1\Shared\BlazorApp1.Shared.csproj", "{74C030D9-2D9C-4140-9789-ECDB9E569B5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp1.Shared", "BlazorApp1\Shared\BlazorApp1.Shared.csproj", "{74C030D9-2D9C-4140-9789-ECDB9E569B5D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BD kiosko", "BD kiosko\BD kiosko.csproj", "{97ED55A3-DFC9-428E-9891-F82432B106F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BD kiosko", "BD kiosko\BD kiosko.csproj", "{97ED55A3-DFC9-428E-9891-F82432B106F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

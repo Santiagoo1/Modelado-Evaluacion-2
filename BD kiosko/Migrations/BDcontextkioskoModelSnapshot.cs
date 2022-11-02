@@ -29,7 +29,10 @@ namespace BD_kiosko.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-                    b.Property<int>("DNI")
+                    b.Property<int>("Cuando_Deben")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Idcliente")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
@@ -37,9 +40,6 @@ namespace BD_kiosko.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
-
-                    b.HasIndex(new[] { "DNI" }, "DNI_UQ")
-                        .IsUnique();
 
                     b.ToTable("clientes");
                 });

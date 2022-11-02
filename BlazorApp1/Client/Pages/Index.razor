@@ -1,9 +1,116 @@
 ﻿@page "/"
+@inject IHttpService http
 
-<PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
+<h3>Lista de Clientes</h3>
 
-Welcome to your new app.
+<a class="btn btn-primary" href="/Clientes/Crear">Nuevo Cliente</a>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Plata que deben</th>
+    </tr>
+</table>
+@if (clientes == null)
+{
+    <tr>Cargando........</tr>
+}
+else if(clientes.Count == 0)
+{
+    <tr>No existen datos</tr>
+}
+else
+{
+    foreach(var item in clientes)
+    {
+        <tr>
+            <td>@item.Idcliente</td>
+            <td>@item.Nombre</td>
+            <td>@item.Cuando_Deben</td>
+            <td>
+                <a class="btn btn-primary"
+                href="Clientes/editar/@item.ID">Editar</a>
+
+            </td>
+            <td>
+                <button class="btn btn-warning"
+                @onclick="()=>Eliminar(item)">
+                Eliminar
+                </button>
+            </td>
+        </tr>
+    }
+}
+
+<Confirmacion @ref="confirmacion"
+              verCancelar="true"
+              verOk="true"
+              
+              textOk="Ok"
+              Titulo="Borrar Especialidad"
+              onCancel="Cancelar"
+              onConfirm="Borrar">
+              <div>
+                  Esta por eliminar el cliente @ClienteBorrar.Nombre
+                  <br />
+                  ¿Esta seguro que desea continuar?
+              </div>
+              
+
+
+
+
+
+</Confirmacion>
+
+
+
+
+
+
+
+@code{
+    List<Cliente> clientes;
+    Cliente ClienteBorrar;
+    Confirmacion confirmacion;
+
+    protected override async Task OnInitializedAsync()
+    {
+        base.OnInitializedAsync();
+        await Leer();
+    }
+
+    private async Task Leer()
+    {
+        var respuesta = await http.Get<List<Cliente>>("api/Clientes");
+        if (!respuesta.Error)
+        {
+            clientes = respuesta.Respuesta;
+        }
+    }
+
+    private void Eliminar(Cliente clienteBorrar)
+    {
+        ClienteBorrar = clienteBorrar;
+        confirmacion.Ver();
+    }
+
+    private void Cancelar()
+    {
+        confirmacion.Ocultar();
+        ClienteBorrar = null;
+    }
+
+    private async Task Borrar()
+    {
+        var respuesta = await http.delete($"api/Clientes/{ClienteBorrar.ID}");
+        if (respuesta.Error)
+        {
+            var body = "Error";
+        }
+        Cancelar();
+        await Leer();
+    }
+}
